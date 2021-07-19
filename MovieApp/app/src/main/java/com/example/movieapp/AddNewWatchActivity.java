@@ -1,6 +1,10 @@
 package com.example.movieapp;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +17,7 @@ import com.example.movieapp.models.Show;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,14 +33,14 @@ public class AddNewWatchActivity extends AppCompatActivity {
     private RecyclerView showList;
     private List<Show> shows;
     private ShowAdapter adapter;
-
+    private MovieService movieService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_watch);
 
-        MovieService movieService = getRetrofitInstance().create(MovieService.class);
-        Call<MovieDBResponse> callMovieAsync = movieService.getResponse(API_KEY, "avengers", 1);
+        movieService = getRetrofitInstance().create(MovieService.class);
+
        // Toast.makeText(AddNewWatchActivity.this,  callMovieAsync.request().toString(), Toast.LENGTH_SHORT).show();
 
         shows = new ArrayList<>();
@@ -52,23 +57,7 @@ public class AddNewWatchActivity extends AppCompatActivity {
         showList.setAdapter(adapter);
 
 
-        callMovieAsync.enqueue(new Callback<MovieDBResponse> () {
 
-            @Override
-            public void onResponse(Call<MovieDBResponse> call, Response<MovieDBResponse> response) {
-                if(response.code() == HTTP_OK) {
-                    assert response.body() != null;
-                    shows.addAll(response.body().getResults());
-                    adapter.notifyDataSetChanged();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<MovieDBResponse> call, Throwable t) {
-
-                Toast.makeText(AddNewWatchActivity.this, t.toString(), Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     public static Retrofit getRetrofitInstance() {
@@ -80,5 +69,49 @@ public class AddNewWatchActivity extends AppCompatActivity {
         }
 
         return mRetrofit;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.showlist_menu, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.show_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if(newText != null || newText.length() != 0) {
+                    Call<MovieDBResponse> callMovieAsync = movieService.getResponse(API_KEY, newText, 1);
+                    callMovieAsync.enqueue(new Callback<MovieDBResponse> () {
+
+                        @Override
+                        public void onResponse(Call<MovieDBResponse> call, Response<MovieDBResponse> response) {
+                            if(response.code() == HTTP_OK) {
+                                assert response.body() != null;
+                                shows.clear();
+                                shows.addAll(response.body().getResults());
+                                adapter.notifyDataSetChanged();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<MovieDBResponse> call, Throwable t) {
+
+                            Toast.makeText(AddNewWatchActivity.this, t.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+                return false;
+            }
+        });
+
+        return true;
     }
 }

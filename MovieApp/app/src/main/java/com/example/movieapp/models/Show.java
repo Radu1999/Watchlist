@@ -22,6 +22,7 @@ public class Show {
     private String synopsys;
 
     @ColumnInfo(name = "rating")
+    @SerializedName("vote_average")
     private double rating;
 
     public Show(String title,  String synopsys, double rating) {
