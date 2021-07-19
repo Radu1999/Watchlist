@@ -4,6 +4,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.google.gson.annotations.SerializedName;
+
 @Entity(tableName = "Show")
 public class Show {
 
@@ -12,9 +14,11 @@ public class Show {
     private int showId;
 
     @ColumnInfo(name = "title")
+    @SerializedName("original_title")
     private String title;
 
     @ColumnInfo(name = "synopsys")
+    @SerializedName("overview")
     private String synopsys;
 
     @ColumnInfo(name = "rating")

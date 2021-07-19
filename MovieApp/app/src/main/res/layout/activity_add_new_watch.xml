@@ -4,4 +4,10 @@
     android:layout_height="match_parent"
     android:background="#ADD8E6">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/addNew_listRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

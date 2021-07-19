@@ -20,8 +20,12 @@ import com.example.movieapp.R;
 import com.example.movieapp.models.Show;
 
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import ru.embersoft.expandabletextview.ExpandableTextView;
 
 public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ShowItemViewHolder> implements
         Filterable {
@@ -91,7 +95,8 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ShowItemViewHo
     static class ShowItemViewHolder extends RecyclerView.ViewHolder {
         private ImageView showImage;
         private TextView showTitle;
-        private TextView showSynopsys;
+//        private ExpandableTextView showSynopsys;
+        TextView showSynopsys;
         private RatingBar rating;
 
         public ShowItemViewHolder(@NonNull View itemView) {
