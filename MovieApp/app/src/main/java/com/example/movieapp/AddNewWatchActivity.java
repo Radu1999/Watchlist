@@ -5,6 +5,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -37,6 +38,7 @@ public class AddNewWatchActivity extends AppCompatActivity {
     private List<Show> shows;
     private ShowAdapter adapter;
     private MovieService movieService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +46,7 @@ public class AddNewWatchActivity extends AppCompatActivity {
 
         movieService = getRetrofitInstance().create(MovieService.class);
 
-       // Toast.makeText(AddNewWatchActivity.this,  callMovieAsync.request().toString(), Toast.LENGTH_SHORT).show();
+        // Toast.makeText(AddNewWatchActivity.this,  callMovieAsync.request().toString(), Toast.LENGTH_SHORT).show();
 
         shows = new ArrayList<>();
 
@@ -58,7 +60,6 @@ public class AddNewWatchActivity extends AppCompatActivity {
         adapter = new ShowAdapter(shows);
 
         showList.setAdapter(adapter);
-
 
 
     }
@@ -90,13 +91,13 @@ public class AddNewWatchActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if(newText != null || newText.length() != 0) {
+                if (newText != null || newText.length() != 0) {
                     Call<MovieDBResponse> callMovieAsync = movieService.getResponse(API_KEY, newText, 1);
-                    callMovieAsync.enqueue(new Callback<MovieDBResponse> () {
+                    callMovieAsync.enqueue(new Callback<MovieDBResponse>() {
 
                         @Override
                         public void onResponse(Call<MovieDBResponse> call, Response<MovieDBResponse> response) {
-                            if(response.code() == HTTP_OK) {
+                            if (response.code() == HTTP_OK) {
                                 assert response.body() != null;
                                 shows.clear();
                                 shows.addAll(response.body().getResults());
@@ -121,7 +122,16 @@ public class AddNewWatchActivity extends AppCompatActivity {
     public void onAddShowToDatabaseClick(View view) {
         RelativeLayout relativeLayout = (RelativeLayout) view.getParent();
         TextView title = relativeLayout.findViewById(R.id.itemShow_title);
-        Toast.makeText(AddNewWatchActivity.this,  title.getText().toString(), Toast.LENGTH_SHORT).show();
+        TextView synopsys = relativeLayout.findViewById(R.id.itemShow_synopsys);
+        TextView id = relativeLayout.findViewById(R.id.itemShow_id);
+        RatingBar ratingBar = relativeLayout.findViewById(R.id.itemShow_ratingBar);
+
+        Show addedShow = new Show(Integer.parseInt(id.getText().toString()), title.getText().toString(),
+                synopsys.getText().toString(),
+                ratingBar.getRating() * 2);
+
+        AppDatabase.getAppDatabase(getApplicationContext()).showDao().insertShow(addedShow);
+        Toast.makeText(AddNewWatchActivity.this, "Added to watchlist", Toast.LENGTH_SHORT).show();
     }
 
 

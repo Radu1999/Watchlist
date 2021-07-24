@@ -95,6 +95,7 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ShowItemViewHo
     static class ShowItemViewHolder extends RecyclerView.ViewHolder {
         private ImageView showImage;
         private TextView showTitle;
+        private TextView id;
 //        private ExpandableTextView showSynopsys;
         TextView showSynopsys;
         private RatingBar rating;
@@ -105,6 +106,7 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ShowItemViewHo
             showTitle = itemView.findViewById(R.id.itemShow_title);
             showSynopsys = itemView.findViewById(R.id.itemShow_synopsys);
             rating = itemView.findViewById(R.id.itemShow_ratingBar);
+            id = itemView.findViewById(R.id.itemShow_id);
         }
 
         public void update(Show show) {
@@ -112,6 +114,7 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ShowItemViewHo
             showTitle.setText(show.getTitle());
             showSynopsys.setText(show.getSynopsys());
             rating.setRating((float) show.getRating() / 2);
+            id.setText(String.valueOf(show.getShowId()));
 
         }
     }
