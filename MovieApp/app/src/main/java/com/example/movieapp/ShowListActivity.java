@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
 import android.widget.SearchView;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.movieapp.adapters.ShowAdapter;
 import com.example.movieapp.models.Show;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,13 +30,7 @@ public class ShowListActivity extends AppCompatActivity {
 
         shows = new ArrayList<>();
 
-        shows.add(new Show("Avengers", "Iron man dies", 4.5));
-        shows.add(new Show("Spiderman", "Peter Parker is a hero", 4.5));
-        shows.add(new Show("Xmen", "Logan <3", 4));
-        shows.add(new Show("Matrix", "Neo is cool", 4));
-        shows.add(new Show("Star Wars: A new Hope", "Luke Skywalker yee", 4.5));
-        shows.add(new Show("Star Wars: Revenge of the Sith", "Anakin is up to no good", 5));
-
+        shows = AppDatabase.getAppDatabase(getApplicationContext()).showDao().getAllShows();
 
         showList = findViewById(R.id.actShowList_listRecyclerView);
         showList.hasFixedSize();
@@ -75,4 +70,6 @@ public class ShowListActivity extends AppCompatActivity {
 
         return true;
     }
+
+
 }

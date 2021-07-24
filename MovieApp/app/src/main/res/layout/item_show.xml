@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="8dp">
 
     <ImageView
@@ -30,7 +31,21 @@
         android:textColor="#999999"
         />
 
-<!--    <ru.embersoft.expandabletextview.ExpandableTextView-->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:src="@drawable/ic_add_button_foreground"
+        android:contentDescription="@string/submit"
+        android:layout_toEndOf="@id/itemShow_ratingBar"
+        android:layout_alignBottom="@+id/itemShow_ratingBar"
+        android:layout_marginBottom="6dp"
+        android:onClick="onAddShowToDatabaseClick"
+        app:fabSize="mini" />
+
+
+    <!--    <ru.embersoft.expandabletextview.ExpandableTextView-->
 <!--        android:id="@+id/itemShow_synopsys"-->
 <!--        android:layout_width="wrap_content"-->
 <!--        android:layout_height="wrap_content"-->

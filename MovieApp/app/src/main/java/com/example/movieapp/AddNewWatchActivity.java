@@ -4,7 +4,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -114,4 +117,12 @@ public class AddNewWatchActivity extends AppCompatActivity {
 
         return true;
     }
+
+    public void onAddShowToDatabaseClick(View view) {
+        RelativeLayout relativeLayout = (RelativeLayout) view.getParent();
+        TextView title = relativeLayout.findViewById(R.id.itemShow_title);
+        Toast.makeText(AddNewWatchActivity.this,  title.getText().toString(), Toast.LENGTH_SHORT).show();
+    }
+
+
 }

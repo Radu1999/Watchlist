@@ -109,7 +109,6 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ShowItemViewHo
 
         public void update(Show show) {
 
-
             showTitle.setText(show.getTitle());
             showSynopsys.setText(show.getSynopsys());
             rating.setRating((float) show.getRating() / 2);

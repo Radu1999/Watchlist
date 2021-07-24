@@ -3,4 +3,5 @@
     <string name="m_show"> Show List </string>
     <string name="m_add"> Add a new watch</string>
     <string name="search"> Search </string>
+    <string name="submit"> Add to watchlist</string>
 </resources>

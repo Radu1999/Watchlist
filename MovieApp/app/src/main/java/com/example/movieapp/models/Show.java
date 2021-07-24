@@ -11,6 +11,7 @@ public class Show {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
+    @SerializedName("id")
     private int showId;
 
     @ColumnInfo(name = "title")
@@ -25,7 +26,8 @@ public class Show {
     @SerializedName("vote_average")
     private double rating;
 
-    public Show(String title,  String synopsys, double rating) {
+    public Show(int showId, String title,  String synopsys, double rating) {
+        this.showId = showId;
         this.title = title;
         this.synopsys = synopsys;
         this.rating = rating;
@@ -54,5 +56,13 @@ public class Show {
 
     public void setRating(double rating) {
         this.rating = rating;
+    }
+
+    public int getShowId() {
+        return showId;
+    }
+
+    public void setShowId(int showId) {
+        this.showId = showId;
     }
 }
