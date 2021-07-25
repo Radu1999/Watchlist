@@ -31,18 +31,18 @@
         android:textColor="#999999"
         />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
+    <Button
+        android:id="@+id/itemShow_addButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:src="@drawable/ic_add_button_foreground"
+        android:text="ADD"
         android:contentDescription="@string/submit"
         android:layout_toEndOf="@id/itemShow_ratingBar"
         android:layout_alignBottom="@+id/itemShow_ratingBar"
         android:layout_marginBottom="6dp"
         android:onClick="onAddShowToDatabaseClick"
-        app:fabSize="mini" />
+        android:backgroundTint="#008000"
+        />
 
 
     <!--    <ru.embersoft.expandabletextview.ExpandableTextView-->

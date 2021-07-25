@@ -57,7 +57,7 @@ public class AddNewWatchActivity extends AppCompatActivity {
 
         showList.setLayoutManager(llm);
 
-        adapter = new ShowAdapter(shows);
+        adapter = new ShowAdapter(shows, true);
 
         showList.setAdapter(adapter);
 

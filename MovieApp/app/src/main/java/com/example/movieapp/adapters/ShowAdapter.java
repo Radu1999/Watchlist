@@ -1,10 +1,15 @@
 package com.example.movieapp.adapters;
 
+import android.app.ActivityManager;
+import android.app.Application;
+import android.content.ComponentName;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
@@ -32,10 +37,12 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ShowItemViewHo
 
     private List<Show> dataSource;
     private List<Show> fullDataSource;
+    private boolean showAdd;
 
-    public ShowAdapter(List<Show> dataSource) {
+    public ShowAdapter(List<Show> dataSource, boolean showAdd) {
         this.dataSource = dataSource;
         fullDataSource = new ArrayList<>(dataSource);
+        this.showAdd = showAdd;
     }
 
     @NonNull
@@ -50,6 +57,8 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ShowItemViewHo
     public void onBindViewHolder(@NonNull ShowItemViewHolder holder, int position) {
         Show current_show = dataSource.get(position);
         holder.update(current_show);
+
+
     }
 
 
@@ -92,13 +101,14 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ShowItemViewHo
         }
     };
 
-    static class ShowItemViewHolder extends RecyclerView.ViewHolder {
+    class ShowItemViewHolder extends RecyclerView.ViewHolder {
         private ImageView showImage;
         private TextView showTitle;
         private TextView id;
 //        private ExpandableTextView showSynopsys;
-        TextView showSynopsys;
+        private TextView showSynopsys;
         private RatingBar rating;
+        private Button addButton;
 
         public ShowItemViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -107,6 +117,8 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ShowItemViewHo
             showSynopsys = itemView.findViewById(R.id.itemShow_synopsys);
             rating = itemView.findViewById(R.id.itemShow_ratingBar);
             id = itemView.findViewById(R.id.itemShow_id);
+            addButton = itemView.findViewById(R.id.itemShow_addButton);
+
         }
 
         public void update(Show show) {
@@ -115,6 +127,9 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ShowItemViewHo
             showSynopsys.setText(show.getSynopsys());
             rating.setRating((float) show.getRating() / 2);
             id.setText(String.valueOf(show.getShowId()));
+            if(!showAdd) {
+                addButton.setVisibility(View.GONE);
+            }
 
         }
     }

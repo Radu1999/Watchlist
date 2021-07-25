@@ -39,7 +39,7 @@ public class ShowListActivity extends AppCompatActivity {
 
         showList.setLayoutManager(llm);
 
-        adapter = new ShowAdapter(shows);
+        adapter = new ShowAdapter(shows, false);
 
         showList.setAdapter(adapter);
 
