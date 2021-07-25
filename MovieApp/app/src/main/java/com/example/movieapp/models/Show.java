@@ -26,11 +26,17 @@ public class Show {
     @SerializedName("vote_average")
     private double rating;
 
-    public Show(int showId, String title,  String synopsys, double rating) {
+    @ColumnInfo(name = "imageUrl")
+    @SerializedName("poster_path")
+    private String imageUrl;
+
+
+    public Show(int showId, String title, String synopsys, double rating, String imageUrl) {
         this.showId = showId;
         this.title = title;
         this.synopsys = synopsys;
         this.rating = rating;
+        this.imageUrl = imageUrl;
     }
 
     public String getTitle() {
@@ -64,5 +70,13 @@ public class Show {
 
     public void setShowId(int showId) {
         this.showId = showId;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

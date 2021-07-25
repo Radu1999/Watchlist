@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.movieapp.R;
 import com.example.movieapp.models.Show;
+import com.squareup.picasso.Picasso;
 
 
 import org.w3c.dom.Text;
@@ -109,6 +110,7 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ShowItemViewHo
         private TextView showSynopsys;
         private RatingBar rating;
         private Button addButton;
+        private TextView imageUrl;
 
         public ShowItemViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -118,7 +120,7 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ShowItemViewHo
             rating = itemView.findViewById(R.id.itemShow_ratingBar);
             id = itemView.findViewById(R.id.itemShow_id);
             addButton = itemView.findViewById(R.id.itemShow_addButton);
-
+            imageUrl = itemView.findViewById(R.id.itemShow_imageUrl);
         }
 
         public void update(Show show) {
@@ -127,6 +129,10 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ShowItemViewHo
             showSynopsys.setText(show.getSynopsys());
             rating.setRating((float) show.getRating() / 2);
             id.setText(String.valueOf(show.getShowId()));
+            imageUrl.setText(show.getImageUrl());
+            Picasso.get().load("https://image.tmdb.org/t/p/original/" + show.getImageUrl()).into(showImage);
+
+
             if(!showAdd) {
                 addButton.setVisibility(View.GONE);
             }

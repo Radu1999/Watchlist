@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase;
 
 import com.example.movieapp.models.Show;
 
-@Database(entities = {Show.class}, version = 1)
+@Database(entities = {Show.class}, version = 2)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase INSTANCE;
@@ -19,7 +19,8 @@ public abstract class AppDatabase extends RoomDatabase {
         if(INSTANCE == null) {
             INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                     AppDatabase.class,
-                    "show-db").allowMainThreadQueries().build();
+                    "show-db").allowMainThreadQueries()
+                    .fallbackToDestructiveMigration().build();
         }
         return INSTANCE;
     }

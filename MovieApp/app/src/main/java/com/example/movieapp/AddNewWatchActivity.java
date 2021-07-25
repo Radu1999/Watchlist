@@ -19,6 +19,7 @@ import com.example.movieapp.adapters.ShowAdapter;
 import com.example.movieapp.models.MovieDBResponse;
 import com.example.movieapp.models.Show;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -38,6 +39,7 @@ public class AddNewWatchActivity extends AppCompatActivity {
     private List<Show> shows;
     private ShowAdapter adapter;
     private MovieService movieService;
+    private static Retrofit imageRetrofit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +47,6 @@ public class AddNewWatchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_new_watch);
 
         movieService = getRetrofitInstance().create(MovieService.class);
-
         // Toast.makeText(AddNewWatchActivity.this,  callMovieAsync.request().toString(), Toast.LENGTH_SHORT).show();
 
         shows = new ArrayList<>();
@@ -125,10 +126,11 @@ public class AddNewWatchActivity extends AppCompatActivity {
         TextView synopsys = relativeLayout.findViewById(R.id.itemShow_synopsys);
         TextView id = relativeLayout.findViewById(R.id.itemShow_id);
         RatingBar ratingBar = relativeLayout.findViewById(R.id.itemShow_ratingBar);
+        TextView imageUrl = relativeLayout.findViewById(R.id.itemShow_imageUrl);
 
         Show addedShow = new Show(Integer.parseInt(id.getText().toString()), title.getText().toString(),
                 synopsys.getText().toString(),
-                ratingBar.getRating() * 2);
+                ratingBar.getRating() * 2, imageUrl.getText().toString());
 
         AppDatabase.getAppDatabase(getApplicationContext()).showDao().insertShow(addedShow);
         Toast.makeText(AddNewWatchActivity.this, "Added to watchlist", Toast.LENGTH_SHORT).show();

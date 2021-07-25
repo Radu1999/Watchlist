@@ -7,11 +7,12 @@
 
     <ImageView
         android:id="@+id/itemShow_vPicture"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="67dp"
+        android:layout_height="100dp"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
         android:layout_marginEnd="16dp"
+        android:layout_alignTop="@+id/itemShow_title"
         />
     <TextView
         android:id="@+id/itemShow_title"
@@ -81,6 +82,11 @@
         android:id="@+id/itemShow_id"
         />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:id="@+id/itemShow_imageUrl"/>
 
 
 </RelativeLayout>
