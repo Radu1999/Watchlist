@@ -29,6 +29,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import java.util.Calendar;
 
 public class AddNewWatchActivity extends AppCompatActivity {
     private static Retrofit mRetrofit;
@@ -109,7 +110,7 @@ public class AddNewWatchActivity extends AppCompatActivity {
                         @Override
                         public void onFailure(Call<MovieDBResponse> call, Throwable t) {
 
-                            Toast.makeText(AddNewWatchActivity.this, t.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AddNewWatchActivity.this, "Check internet connection", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -130,7 +131,7 @@ public class AddNewWatchActivity extends AppCompatActivity {
 
         Show addedShow = new Show(Integer.parseInt(id.getText().toString()), title.getText().toString(),
                 synopsys.getText().toString(),
-                ratingBar.getRating() * 2, imageUrl.getText().toString());
+                ratingBar.getRating() * 2, imageUrl.getText().toString(), Calendar.getInstance().getTime());
 
         AppDatabase.getAppDatabase(getApplicationContext()).showDao().insertShow(addedShow);
         Toast.makeText(AddNewWatchActivity.this, "Added to watchlist", Toast.LENGTH_SHORT).show();

@@ -1,5 +1,6 @@
 package com.example.movieapp.adapters;
 
+import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.app.Application;
 import android.content.ComponentName;
@@ -28,6 +29,7 @@ import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -111,6 +113,7 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ShowItemViewHo
         private RatingBar rating;
         private Button addButton;
         private TextView imageUrl;
+        private TextView dateWatched;
 
         public ShowItemViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -121,8 +124,10 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ShowItemViewHo
             id = itemView.findViewById(R.id.itemShow_id);
             addButton = itemView.findViewById(R.id.itemShow_addButton);
             imageUrl = itemView.findViewById(R.id.itemShow_imageUrl);
+            dateWatched = itemView.findViewById(R.id.itemShow_date);
         }
 
+        @SuppressLint({"SimpleDateFormat", "SetTextI18n"})
         public void update(Show show) {
 
             showTitle.setText(show.getTitle());
@@ -135,6 +140,8 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ShowItemViewHo
 
             if(!showAdd) {
                 addButton.setVisibility(View.GONE);
+                dateWatched.setText("Watched in: "+ new SimpleDateFormat("yyyy-MM-dd").format(show.getDate()));
+                dateWatched.setVisibility(View.VISIBLE);
             }
 
         }

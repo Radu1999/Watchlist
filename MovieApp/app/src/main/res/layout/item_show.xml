@@ -22,12 +22,24 @@
         android:layout_alignParentTop="true"
         android:textSize="20sp"
         />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/itemShow_date"
+        android:layout_below="@+id/itemShow_title"
+        android:layout_toEndOf="@+id/itemShow_vPicture"
+        android:visibility="gone"
+        />
+
+
+
     <TextView
         android:id="@+id/itemShow_synopsys"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/itemShow_vPicture"
-        android:layout_below="@id/itemShow_title"
+        android:layout_below="@id/itemShow_date"
         android:textSize="14sp"
         android:textColor="#999999"
         />
