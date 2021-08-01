@@ -59,7 +59,7 @@ public class AddNewWatchActivity extends AppCompatActivity {
 
         showList.setLayoutManager(llm);
 
-        adapter = new ShowAdapter(shows, true);
+        adapter = new ShowAdapter(shows, true, this);
 
         showList.setAdapter(adapter);
 
@@ -122,12 +122,12 @@ public class AddNewWatchActivity extends AppCompatActivity {
     }
 
     public void onAddShowToDatabaseClick(View view) {
-        RelativeLayout relativeLayout = (RelativeLayout) view.getParent();
-        TextView title = relativeLayout.findViewById(R.id.itemShow_title);
-        TextView synopsys = relativeLayout.findViewById(R.id.itemShow_synopsys);
-        TextView id = relativeLayout.findViewById(R.id.itemShow_id);
-        RatingBar ratingBar = relativeLayout.findViewById(R.id.itemShow_ratingBar);
-        TextView imageUrl = relativeLayout.findViewById(R.id.itemShow_imageUrl);
+        View itemShow = (View) view.getParent();
+        TextView title = itemShow.findViewById(R.id.itemShow_title);
+        TextView synopsys = itemShow.findViewById(R.id.itemShow_synopsys);
+        TextView id = itemShow.findViewById(R.id.itemShow_id);
+        RatingBar ratingBar = itemShow.findViewById(R.id.itemShow_ratingBar);
+        TextView imageUrl = itemShow.findViewById(R.id.itemShow_imageUrl);
 
         Show addedShow = new Show(Integer.parseInt(id.getText().toString()), title.getText().toString(),
                 synopsys.getText().toString(),

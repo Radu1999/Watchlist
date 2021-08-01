@@ -30,6 +30,7 @@
         android:layout_below="@+id/itemShow_title"
         android:layout_toEndOf="@+id/itemShow_vPicture"
         android:visibility="gone"
+        android:onClick="showTimePickerDialog"
         />
 
 

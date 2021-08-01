@@ -5,10 +5,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import android.view.View;
 import android.widget.SearchView;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -39,7 +41,7 @@ public class ShowListActivity extends AppCompatActivity {
 
         showList.setLayoutManager(llm);
 
-        adapter = new ShowAdapter(shows, false);
+        adapter = new ShowAdapter(shows, false, this);
 
         showList.setAdapter(adapter);
 

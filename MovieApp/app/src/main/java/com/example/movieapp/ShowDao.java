@@ -7,6 +7,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.TypeConverter;
 import androidx.room.TypeConverters;
+import androidx.room.Update;
 
 import com.example.movieapp.converters.DateConverter;
 import com.example.movieapp.models.Show;
@@ -25,4 +26,7 @@ public interface ShowDao {
 
     @Delete
     void delete(Show show);
+
+    @Update
+    void update(Show show);
 }

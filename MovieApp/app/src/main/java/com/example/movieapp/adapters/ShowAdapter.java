@@ -19,9 +19,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.example.movieapp.DatePickerFragment;
 import com.example.movieapp.R;
 import com.example.movieapp.models.Show;
 import com.squareup.picasso.Picasso;
@@ -41,11 +43,13 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ShowItemViewHo
     private List<Show> dataSource;
     private List<Show> fullDataSource;
     private boolean showAdd;
+    private AppCompatActivity activity;
 
-    public ShowAdapter(List<Show> dataSource, boolean showAdd) {
+    public ShowAdapter(List<Show> dataSource, boolean showAdd, AppCompatActivity activity) {
         this.dataSource = dataSource;
         fullDataSource = new ArrayList<>(dataSource);
         this.showAdd = showAdd;
+        this.activity = activity;
     }
 
     @NonNull
@@ -60,9 +64,9 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ShowItemViewHo
     public void onBindViewHolder(@NonNull ShowItemViewHolder holder, int position) {
         Show current_show = dataSource.get(position);
         holder.update(current_show);
-
-
     }
+
+
 
 
     @Override
@@ -125,6 +129,15 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ShowItemViewHo
             addButton = itemView.findViewById(R.id.itemShow_addButton);
             imageUrl = itemView.findViewById(R.id.itemShow_imageUrl);
             dateWatched = itemView.findViewById(R.id.itemShow_date);
+
+            dateWatched.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DatePickerFragment newFragment = new DatePickerFragment();
+                    newFragment.setRequirements(ShowAdapter.this, dataSource, getAdapterPosition());
+                    newFragment.show(activity.getSupportFragmentManager(), "datePicker");
+                }
+            });
         }
 
         @SuppressLint({"SimpleDateFormat", "SetTextI18n"})
@@ -145,6 +158,8 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ShowItemViewHo
             }
 
         }
+
+
     }
 }
 
